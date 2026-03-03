@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block body %}
+    <!---Navbar-->
+    <div class="container my-4">
+        <h2>ADD a Todo</h2>
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Todo title</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Todo Description</label>
+                <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    <div class="container my-4 ">
+    <h2> Your Todos </h2>
+
+    {% if allTodo |length==0 %}
+    <div class="alert alert-dark" role="alert">
+        No Todos found. Add your first todo now!
+        </div>
+        {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">decription</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in allTodo %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.desc}}</td>
+                    <td>{{todo.date_created}}</td>
+                    <td>
+                        <a href="/update/{{todo.sno}}" 
+                            class="btn btn-outline-danger btn-sm mx-1">Update</a>
+                        <a href="/delete/{{todo.sno}}" 
+                            class="btn btn-outline-danger btn-sm mx-1">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+                
+                
+
+
+
+    </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+{% endblock  %}
